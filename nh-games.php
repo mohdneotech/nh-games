@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name:       NH Games — Steam & PlayStation Shelf
+ * Plugin Name:       NH Games â€” Steam & PlayStation Shelf
  * Plugin URI:        https://github.com/mohdneotech/nh-games
- * Description:       Show every game you've played on Steam and/or PlayStation — playtime, last played, achievements & trophies, a "Now playing" sidebar widget and a full games page. Enable only the platforms you use.
- * Version:           1.0.0
+ * Description:       Show every game you've played on Steam and/or PlayStation â€” playtime, last played, achievements & trophies, a "Now playing" sidebar widget and a full games page. Enable only the platforms you use.
+ * Version:           1.0.1
  * Requires at least: 6.2
  * Requires PHP:      8.0
  * Author:            Mohd Nordin Hussain
@@ -14,7 +14,7 @@
  */
 if (!defined('ABSPATH')) exit;
 
-define('NHG_VER', '1.0.0');
+define('NHG_VER', '1.0.1');
 define('NHG_FILE', __FILE__);
 define('NHG_URL', plugin_dir_url(__FILE__));
 

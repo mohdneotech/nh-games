@@ -2,7 +2,9 @@
 .nhg-scope{--nhg-accent:#FFCC00;--nhg-text:#e8ecf1;--nhg-muted:#9aa5b1;--nhg-surface:#151515;--nhg-surface-2:#222;--nhg-border:rgb(36,48,64);--nhg-on-accent:#111}
 
 /* Shield from theme link/heading/image styles (doubled class = higher specificity) */
-.nhg-scope.nhg-scope a,.nhg-scope.nhg-scope a:hover,.nhg-scope.nhg-scope a *{text-decoration:none;border-bottom:0;background-image:none;box-shadow:none}
+.nhg-scope.nhg-scope a,.nhg-scope.nhg-scope a:hover,.nhg-scope.nhg-scope a *{text-decoration:none!important;border-bottom:0;background-image:none;box-shadow:none}
+/* never let our content widen the theme's column (fixes mobile overflow) */
+.nhg-page,.nhg-hero,.nhg-more{contain:inline-size;min-width:0;max-width:100%}
 .nhg-scope.nhg-scope a.nhg-card,.nhg-scope.nhg-scope a.nhg-wide{color:inherit}
 .nhg-scope.nhg-scope h2::before,.nhg-scope.nhg-scope h3::before,.nhg-scope.nhg-scope h2::after{content:none;display:none}
 .nhg-scope.nhg-scope img{margin:0;border-radius:0;box-shadow:none;max-width:100%}
@@ -118,7 +120,9 @@
 .nhg-crumbs{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85rem;opacity:.8}
 
 @media(max-width:576px){
-  .nhg-grid{grid-template-columns:repeat(2,1fr)}
+  .nhg-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem}
+  .nhg-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
+  .nhg-stats>div{padding:.8rem}.nhg-stats b{font-size:1.3rem}.nhg-stats i{font-size:1.3rem}
   .nhg-scope.nhg-scope .nhg-hero-img{width:120px}
   .nhg-wide{flex-direction:column}.nhg-wide-img,.nhg-wide.is-psn .nhg-wide-img{flex-basis:auto;width:100%;aspect-ratio:460/215}
   .nhg-rail-nav{display:none}.nhg-tools .nhg-sort{margin-left:0}.nhg-tools input{min-width:0;flex:1}
