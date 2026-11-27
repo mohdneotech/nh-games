@@ -21,14 +21,14 @@ function nhg_box($p) {
     echo '<p><label>' . esc_html__('Last played', 'nh-games') . '</label><input type="date" style="width:100%" name="nhg_lastdate" value="' . esc_attr($m('last') ? gmdate('Y-m-d', (int) $m('last')) : '') . '"></p>';
 }
 add_action('save_post_nh_game', function ($id) {
-    if (!isset($_POST['nhg_nonce']) || !wp_verify_nonce($_POST['nhg_nonce'], 'nhg_save') || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || !current_user_can('edit_post', $id)) return;
+    if (!isset($_POST['nhg_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nhg_nonce'])), 'nhg_save') || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || !current_user_can('edit_post', $id)) return;
     update_post_meta($id, '_nhg_pin', empty($_POST['nhg_pin']) ? '' : '1');
     update_post_meta($id, '_nhg_rating', min(5, max(0, (int) ($_POST['nhg_rating'] ?? 0))) ?: '');
     if (!get_post_meta($id, '_nhg_key', true)) { // manual entries
         update_post_meta($id, '_nhg_platform', ($_POST['nhg_platform'] ?? '') === 'steam' ? 'steam' : 'psn');
         update_post_meta($id, '_nhg_device', sanitize_text_field(wp_unslash($_POST['nhg_device'] ?? '')));
         update_post_meta($id, '_nhg_minutes', (int) round((float) ($_POST['nhg_hours'] ?? 0) * 60));
-        update_post_meta($id, '_nhg_last', !empty($_POST['nhg_lastdate']) ? strtotime($_POST['nhg_lastdate'] . ' 12:00') : 0);
+        update_post_meta($id, '_nhg_last', !empty($_POST['nhg_lastdate']) ? (strtotime(sanitize_text_field(wp_unslash($_POST['nhg_lastdate'])) . ' 12:00') ?: 0) : 0);
         update_post_meta($id, '_nhg_cover', esc_url_raw(wp_unslash($_POST['nhg_cover'] ?? '')));
     }
     delete_transient('nhg_stats');
